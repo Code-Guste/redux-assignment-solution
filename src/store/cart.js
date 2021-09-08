@@ -25,6 +25,7 @@ export const initialState = {
       quantity: 1,
     },
   ],
+  addedItems: [],
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -33,7 +34,14 @@ const cartSlice = createSlice({
     toggle: (state) => {
       state.show = !state.show;
     },
+    addToCart: (state, action) => {
+      let addedItem = state.productList.find(
+        (item) => item.id === action.payload
+      );
+
+      state.addedItems.push(addedItem);
+    },
   },
 });
-export const { toggle } = cartSlice.actions;
+export const { toggle, addToCart } = cartSlice.actions;
 export default cartSlice.reducer;
