@@ -35,20 +35,27 @@ const cartSlice = createSlice({
       state.show = !state.show;
     },
     addToCart: (state, action) => {
-      let addedItem = state.productList.find(
+      const addedItem = state.productList.find(
         (item) => item.id === action.payload
       );
-      let existing_item = state.addedItems.find(
+      const existingItem = state.addedItems.find(
         (item) => item.id === action.payload
       );
 
-      if (existing_item) {
-        existing_item.quantity++;
+      if (existingItem) {
+        existingItem.quantity++;
       } else {
         state.addedItems.push(addedItem);
       }
     },
+
+    removeFromCart: (state, action) => {
+      const existingItem = state.addedItems.find(
+        (item) => item.id === action.payload
+      );
+      existingItem.quantity--;
+    },
   },
 });
-export const { toggle, addToCart } = cartSlice.actions;
+export const { toggle, addToCart, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

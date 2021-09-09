@@ -12,6 +12,7 @@ const Cart = (props) => {
         {cartList.map((product) => (
           <CartItem
             item={{
+              id: product.id,
               title: product.title,
               quantity: product.quantity,
               total: 16,
