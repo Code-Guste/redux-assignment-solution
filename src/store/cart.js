@@ -9,6 +9,7 @@ export const initialState = {
       price: 12,
       description: "Oversized t-shirt",
       quantity: 1,
+      total: 12,
     },
     {
       id: 2,
@@ -16,6 +17,7 @@ export const initialState = {
       price: 20,
       description: "Stylish unisex hoodie",
       quantity: 1,
+      total: 20,
     },
     {
       id: 3,
@@ -23,6 +25,7 @@ export const initialState = {
       price: 25,
       description: "Cropped women jeans",
       quantity: 1,
+      total: 25,
     },
   ],
   addedItems: [],
@@ -44,6 +47,7 @@ const cartSlice = createSlice({
 
       if (existingItem) {
         existingItem.quantity++;
+        existingItem.total += existingItem.price;
       } else {
         state.addedItems.push(addedItem);
       }
@@ -54,6 +58,7 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload
       );
       existingItem.quantity--;
+      existingItem.total -= existingItem.price;
     },
   },
 });
