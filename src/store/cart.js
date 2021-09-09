@@ -38,8 +38,15 @@ const cartSlice = createSlice({
       let addedItem = state.productList.find(
         (item) => item.id === action.payload
       );
+      let existing_item = state.addedItems.find(
+        (item) => item.id === action.payload
+      );
 
-      state.addedItems.push(addedItem);
+      if (existing_item) {
+        existing_item.quantity++;
+      } else {
+        state.addedItems.push(addedItem);
+      }
     },
   },
 });
