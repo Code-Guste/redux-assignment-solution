@@ -29,6 +29,7 @@ export const initialState = {
     },
   ],
   addedItems: [],
+  totalQuantity: 0,
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -45,6 +46,8 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload
       );
 
+      state.totalQuantity++;
+
       if (existingItem) {
         existingItem.quantity++;
         existingItem.total += existingItem.price;
@@ -57,6 +60,7 @@ const cartSlice = createSlice({
       const existingItem = state.addedItems.find(
         (item) => item.id === action.payload
       );
+      state.totalQuantity--;
       if (existingItem.quantity === 1) {
         state.addedItems = state.addedItems.filter(
           (item) => item.id !== action.payload
